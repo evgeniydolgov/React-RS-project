@@ -1,0 +1,11 @@
+.container {
+  background-color: aquamarine;
+  display: flex;
+}
+
+.header {
+  margin: 0 auto;
+  height: 80px;
+  max-width: 1400px;
+  width: 100%;
+}
