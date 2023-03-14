@@ -6,7 +6,7 @@ export class Header extends Component {
   render() {
     return (
       <>
-        <div className={styles.container}>
+        <header className={styles.container}>
           <div className={styles.header}>
             <ul className={styles.header__list}>
               <li>Main Page</li>
@@ -16,7 +16,7 @@ export class Header extends Component {
               <img src={reactImg} alt="react image" />
             </div>
           </div>
-        </div>
+        </header>
       </>
     );
   }

@@ -1,3 +1,4 @@
+import { MainPage } from "./components/MainPage";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
@@ -8,7 +9,9 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}></Route>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<MainPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     );
