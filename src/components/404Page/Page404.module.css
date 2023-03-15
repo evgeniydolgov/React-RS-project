@@ -1,0 +1,15 @@
+.NonPage__container {
+  flex-grow: 1;
+  background-color: beige;
+  display: flex;
+  align-items: center;
+}
+
+.NonPage {
+  text-align: center;
+  font-size: 45px;
+  padding: 0 10px;
+  margin: 0 auto;
+  max-width: 1400px;
+
+}
