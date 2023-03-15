@@ -1,0 +1,13 @@
+.card__container {
+  width: 200px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: rgb(145, 212, 190);
+}
+
+.card__img>img {
+  width: 100%;
+}
+.card__text {
+  padding: 5px;
+}

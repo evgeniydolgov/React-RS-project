@@ -1,10 +1,10 @@
-import { MainPage } from "./components/MainPage";
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Layout } from "./components/Layout";
 import "./index.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { MainPage } from "./components/MainPage";
+import { Layout } from "./components/Layout";
 import { AboutUs } from "./components/AboutUs";
-import { Page404 } from "./components/404Page/Page404";
+import { Page404 } from "./components/Page404";
 
 class App extends React.Component {
   render() {
