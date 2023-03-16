@@ -6,7 +6,7 @@ import { Layout } from "./components/Layout";
 import { AboutUs } from "./components/AboutUs";
 import { Page404 } from "./components/Page404";
 
-class App extends React.Component {
+export class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
