@@ -2,9 +2,31 @@ import React, { Component } from "react";
 import styles from "./Header.module.css";
 import reactImg from "../../assets/svg/react.svg";
 import { NavLink } from "react-router-dom";
+import { withRouter, WithRouterProps } from "../../utils/withRouter";
 
-export class Header extends Component {
+class Header extends Component<WithRouterProps> {
+  state = {
+    pageName: "Main Page",
+  };
+
+  componentDidMount(): void {
+    console.log(1);
+    const { pathname } = this.props.location;
+    if (pathname === "/") {
+      this.setState({ pageName: "Main Page" });
+    } else {
+      this.setState({ pageName: "About" });
+    }
+  }
+
   render() {
+    const { pathname } = this.props.location;
+    console.log(this.state.pageName);
+    // if (pathname === "/") {
+    //   return this.setState({ pageName: "Main Page" });
+    // } else {
+    //   return this.setState({ pageName: "About" });
+    // }
     return (
       <>
         <header className={styles.container}>
@@ -31,6 +53,15 @@ export class Header extends Component {
                 </NavLink>
               </li>
             </ul>
+            <div className={styles.pageTitle}>
+              {pathname === "/" ? (
+                <div>Main Page</div>
+              ) : pathname === "/about" ? (
+                <div>About Page</div>
+              ) : (
+                <div>Page not found</div>
+              )}
+            </div>
             <div className={styles.logo}>
               <img src={reactImg} alt="react image" />
             </div>
@@ -41,4 +72,4 @@ export class Header extends Component {
   }
 }
 
-export default Header;
+export const HeaderWithRouter = withRouter(Header);
