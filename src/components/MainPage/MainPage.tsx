@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import styles from "./MainPage.module.css";
 import { CardList } from "../CardList";
+import { chartersData } from "../../data/data";
 
 export class MainPage extends Component {
   state = {
     inputValue: "",
-    movies: [],
   };
 
   stopSubmit = (event: React.FormEvent) => {
@@ -17,9 +17,6 @@ export class MainPage extends Component {
   };
 
   componentDidMount(): void {
-    fetch("http://www.omdbapi.com/?apikey=4d844669&s=Batman")
-      .then((response) => response.json())
-      .then((data) => this.setState({ movies: data.Search }));
     localStorage.getItem("inputValue")
       ? this.setState({ inputValue: localStorage.getItem("inputValue") })
       : " ";
@@ -48,11 +45,7 @@ export class MainPage extends Component {
               type="submit"
             ></button>
           </form>
-          {this.state.movies.length ? (
-            <CardList movies={this.state.movies} />
-          ) : (
-            <h3>Loading...</h3>
-          )}
+          <CardList charters={chartersData} />
         </div>
       </main>
     );

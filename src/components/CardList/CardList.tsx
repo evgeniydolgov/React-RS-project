@@ -2,25 +2,26 @@ import { Card } from "../Card";
 import React, { Component } from "react";
 import styles from "./CardList.module.css";
 
-export interface MyMovieCard {
-  Poster: string;
-  Title: string;
-  Type: string;
-  Year: string;
-  imdbID: string;
+export interface CarterCard {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  belonging: string;
+  cost: number;
 }
 
-export interface MyProps {
-  movies: MyMovieCard[];
+export interface CarterList {
+  charters: CarterCard[];
 }
 
-export class CardList extends Component<MyProps, MyMovieCard> {
+export class CardList extends Component<CarterList, CarterCard> {
   render() {
-    const { movies } = this.props;
+    const { charters } = this.props;
     return (
       <div className={styles.cardList__container}>
-        {movies.map((movie, i) => {
-          return <Card key={i} {...movie} />;
+        {charters.map((charter) => {
+          return <Card key={charter.id} {...charter} />;
         })}
       </div>
     );
