@@ -6,7 +6,7 @@ export class Card extends Component<CarterCard> {
   render() {
     const { image, name, description, belonging, cost } = this.props;
     return (
-      <div className={styles.card__container}>
+      <div className={styles.card__container} data-testid="card-container">
         <div className={styles.card__img}>
           <div className={styles.golder__board}></div>
           <img src={image} alt="movie picter" />
