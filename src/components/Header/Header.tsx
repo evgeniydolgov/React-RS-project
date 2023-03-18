@@ -10,7 +10,6 @@ class Header extends Component<WithRouterProps> {
   };
 
   componentDidMount(): void {
-    console.log(1);
     const { pathname } = this.props.location;
     if (pathname === "/") {
       this.setState({ pageName: "Main Page" });
@@ -21,12 +20,6 @@ class Header extends Component<WithRouterProps> {
 
   render() {
     const { pathname } = this.props.location;
-    console.log(this.state.pageName);
-    // if (pathname === "/") {
-    //   return this.setState({ pageName: "Main Page" });
-    // } else {
-    //   return this.setState({ pageName: "About" });
-    // }
     return (
       <>
         <header className={styles.container}>
