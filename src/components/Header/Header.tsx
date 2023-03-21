@@ -45,12 +45,24 @@ class Header extends Component<WithRouterProps> {
                   About Us
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/form"
+                  className={({ isActive }) =>
+                    isActive ? styles.active : undefined
+                  }
+                >
+                  Created Card
+                </NavLink>
+              </li>
             </ul>
             <div className={styles.pageTitle}>
               {pathname === "/" ? (
                 <div>Main Page</div>
               ) : pathname === "/about" ? (
                 <div>About Page</div>
+              ) : pathname === "/form" ? (
+                <div>Form Page</div>
               ) : (
                 <div>Page not found</div>
               )}
