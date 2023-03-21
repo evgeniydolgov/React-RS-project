@@ -1,0 +1,18 @@
+.footer {
+  background-color: rgb(109, 206, 174);
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.footer__wrapper {
+  padding: 0 10px;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1400px;
+}
