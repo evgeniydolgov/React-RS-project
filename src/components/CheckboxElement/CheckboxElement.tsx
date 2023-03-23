@@ -1,12 +1,22 @@
 import React, { Component } from "react";
 
-export class CheckboxElement extends Component {
+export interface CheckboxCost {
+  title: string;
+  refInput: React.RefObject<HTMLInputElement>;
+}
+
+export interface CardChange {
+  price: CheckboxCost;
+}
+
+export class CheckboxElement extends Component<CardChange> {
   render() {
+    const { title, refInput } = this.props.price;
     return (
       <>
         <label>
-          <input type="checkbox" name="cost" />
-          <span> 1$</span>
+          <input type="checkbox" name="cost" ref={refInput} value={title} />
+          <span>{title}$</span>
         </label>
       </>
     );
