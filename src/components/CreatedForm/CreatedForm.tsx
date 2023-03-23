@@ -1,57 +1,36 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-types */
+import { InputElement } from "../InputElement";
+import { OneInput } from "../InputElement/InputElement";
 import React, { Component } from "react";
 import styles from "./CreatedForm.module.css";
+import { SelectElement } from "../SelectElement";
 
-interface Props {
-  props: string;
+interface FormCreate {
+  name: OneInput;
+  date: OneInput;
+  file: OneInput;
+  fraction: OneInput;
 }
 
-export class CreatedForm extends Component {
-  selectVal: any;
-  constructor(props: Props) {
-    super(props);
-    this.state = { selectValue: "" };
-  }
-  callThis = () => {
-    console.log(this.selectVal.value);
-  };
+export class CreatedForm extends Component<FormCreate> {
   render() {
     return (
       <form className={styles.form__container}>
-        <label>
-          <span>Card name:</span>
-          <input type="text" />
-        </label>
-        <label>
-          <span>Creation date:</span>
-          <input type="date" />
-        </label>
-        <label>
-          <span>Fraction:</span>
-          <select ref={(input) => (this.selectVal = input)}>
-            <option defaultValue="Neutral">Neutral</option>
-            <option value="Northerners">Northerners</option>
-            <option value="Scoiatael">Scoiatael</option>
-            <option value="Skellige">Skellige</option>
-          </select>
-        </label>
-        <div>
-          <input type="button" value="click" onClick={this.callThis} />
-        </div>
+        <InputElement {...this.props.name} />
+        <InputElement {...this.props.date} />
+        <SelectElement {...this.props.fraction} />
         <span>Card cost:</span>
         <div>
           <label>
             <input type="checkbox" name="cost" />
-            1$
+            <span> 1$</span>
           </label>
           <label>
             <input type="checkbox" name="cost" />
-            5$
+            <span> 5$</span>
           </label>
           <label>
             <input type="checkbox" name="cost" />
-            10$
+            <span> 10$</span>
           </label>
         </div>
         <div>
@@ -65,9 +44,7 @@ export class CreatedForm extends Component {
             No
           </label>
         </div>
-        <label>
-          <input type="file" />
-        </label>
+        <InputElement {...this.props.file} />
       </form>
     );
   }
