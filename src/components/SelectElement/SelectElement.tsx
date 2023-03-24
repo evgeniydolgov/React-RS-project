@@ -8,7 +8,8 @@ export class SelectElement extends Component<OneInput> {
       <>
         <label>
           <span>{title}</span>
-          <select ref={refSelect}>
+          <select ref={refSelect} defaultValue={""}>
+            <option value="" disabled></option>
             <option value="Neutral">Neutral</option>
             <option value="Northerners">Northerners</option>
             <option value="Scoiatael">Scoiatael</option>

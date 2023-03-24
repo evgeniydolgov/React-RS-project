@@ -4,12 +4,17 @@ import styles from "./Card.module.css";
 
 export class Card extends Component<CarterCard> {
   render() {
-    const { image, name, description, belonging, cost } = this.props;
+    const { image, name, description, belonging, cost, upload, frame } =
+      this.props;
+    const imgSrc = upload ? URL.createObjectURL(upload) : image;
+
     return (
       <div className={styles.card__container} data-testid="card-container">
         <div className={styles.card__img}>
-          <div className={styles.golder__board}></div>
-          <img src={image} alt="movie picter" />
+          <div
+            className={frame || frame === undefined ? styles.golder__board : ""}
+          ></div>
+          <img src={imgSrc} alt="movie picter" />
         </div>
         <div className={styles.card__text}>
           <div>
@@ -18,7 +23,6 @@ export class Card extends Component<CarterCard> {
               {name}
             </h3>
             <p>
-              {" "}
               <span style={{ fontSize: "12px" }}>Fraction: </span>
               {belonging[0].toUpperCase() + belonging.slice(1)}
             </p>
@@ -27,7 +31,15 @@ export class Card extends Component<CarterCard> {
               {cost}$
             </p>
           </div>
-          <p>{description}</p>
+          <div>
+            {this.props.date ? (
+              <div>
+                Date of creation: <p>{this.props.date}</p>
+              </div>
+            ) : (
+              description
+            )}
+          </div>
         </div>
       </div>
     );
