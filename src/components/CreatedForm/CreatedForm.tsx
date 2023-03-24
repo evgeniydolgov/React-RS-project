@@ -9,7 +9,7 @@ import { CheckboxCost } from "../CheckboxElement/CheckboxElement";
 import { RadioElement } from "../RadioElement";
 import { ErrorMessage } from "../ErrorMessage";
 
-interface FormCreate {
+export interface FormCreate {
   name: OneInput;
   date: OneInput;
   file: OneInput;
@@ -23,10 +23,10 @@ interface FormCreate {
   FractionError: boolean;
   goldenFrameError: boolean;
   formRef: React.RefObject<HTMLFormElement>;
+  success: boolean;
 }
 
 export class CreatedForm extends Component<FormCreate> {
-  state = {};
   render() {
     const {
       nameError,
@@ -36,6 +36,7 @@ export class CreatedForm extends Component<FormCreate> {
       FractionError,
       goldenFrameError,
       formRef,
+      success,
     } = this.props;
     const { cost, frame } = this.props;
     return (
@@ -43,9 +44,7 @@ export class CreatedForm extends Component<FormCreate> {
         <div>
           <InputElement {...this.props.name} />
           {nameError ? (
-            <ErrorMessage
-              message={"enter up to 10 letters starting with capital"}
-            />
+            <ErrorMessage message={"first upper letter, max 10 length"} />
           ) : (
             <ErrorMessage message={""} />
           )}
@@ -68,7 +67,7 @@ export class CreatedForm extends Component<FormCreate> {
         </div>
         <div>
           <span>Card cost: </span>
-          <div>
+          <div className={styles.choicePrice}>
             {cost.map((el) => (
               <CheckboxElement key={el.title} price={el} />
             ))}
@@ -79,7 +78,7 @@ export class CreatedForm extends Component<FormCreate> {
             )}
           </div>
         </div>
-        <div>
+        <div className={styles.frameChoice}>
           <span>Golden frame: </span>
           {frame.map((el, i) => (
             <RadioElement key={new Date().getSeconds() + i} price={el} />
@@ -96,6 +95,14 @@ export class CreatedForm extends Component<FormCreate> {
             <ErrorMessage message={"upload the image"} />
           ) : (
             <ErrorMessage message={""} />
+          )}
+          <div></div>
+          {success ? (
+            <div style={{ height: "16px", color: "green", fontSize: "16px" }}>
+              card created!
+            </div>
+          ) : (
+            <div style={{ height: "16px" }}></div>
           )}
         </div>
       </form>

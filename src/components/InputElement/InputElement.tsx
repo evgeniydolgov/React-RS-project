@@ -13,7 +13,7 @@ export class InputElement extends Component<OneInput> {
     return (
       <>
         <label>
-          <div>{title}</div>
+          {title}
           <input type={type} ref={refInput} />
         </label>
       </>

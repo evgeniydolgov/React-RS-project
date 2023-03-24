@@ -4,6 +4,7 @@ import styles from "./FormPage.module.css";
 import { CreatedForm } from "../CreatedForm";
 import { Card } from "../Card";
 import { CarterCard } from "../CardList/CardList";
+import { FormCreate } from "../CreatedForm/CreatedForm";
 
 export class FormPage extends Component {
   state = {
@@ -42,6 +43,7 @@ export class FormPage extends Component {
     imageError: false,
     FractionError: false,
     goldenFrameError: false,
+    success: false,
     formRef: React.createRef<HTMLFormElement>(),
   };
   formChecker = () => {
@@ -116,20 +118,29 @@ export class FormPage extends Component {
       frame
     ) {
       this.state.cardsParams.push(newCard);
-      this.setState({ cardsParams: this.state.cardsParams });
+      this.setState({ cardsParams: this.state.cardsParams, success: true });
       this.state.formRef.current?.reset();
     }
   };
+  componentDidUpdate(prevState: FormCreate) {
+    if (this.state.success !== prevState.success) {
+      setTimeout(() => {
+        this.setState({ success: false });
+      }, 2000);
+    }
+  }
   render() {
     return (
       <div className={styles.formPage}>
         <CreatedForm {...this.state} />
-        <div>
-          <input type="button" value="SEND" onClick={this.formChecker} />
+        <button type="button" onClick={this.formChecker}>
+          SEND
+        </button>
+        <div className={styles.newCard__container}>
+          {this.state.cardsParams.map((el, i) => {
+            return <Card key={i} {...el} />;
+          })}
         </div>
-        {this.state.cardsParams.map((el, i) => {
-          return <Card key={i} {...el} />;
-        })}
       </div>
     );
   }
