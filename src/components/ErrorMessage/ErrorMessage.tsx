@@ -8,7 +8,7 @@ export class ErrorMessage extends Component<ErrorText> {
   render() {
     const { message } = this.props;
     return (
-      <div
+      <p
         style={
           message
             ? { color: "red", height: "14px", fontSize: "12px" }
@@ -16,7 +16,7 @@ export class ErrorMessage extends Component<ErrorText> {
         }
       >
         {"Error! Please " + message}
-      </div>
+      </p>
     );
   }
 }

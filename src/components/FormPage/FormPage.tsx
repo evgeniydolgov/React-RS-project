@@ -131,7 +131,7 @@ export class FormPage extends Component {
   }
   render() {
     return (
-      <div className={styles.formPage}>
+      <div className={styles.formPage} data-testid="form_page">
         <CreatedForm {...this.state} />
         <button type="button" onClick={this.formChecker}>
           SEND

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { InputElement } from "../InputElement";
 import { OneInput } from "../InputElement/InputElement";
 import React, { Component } from "react";
