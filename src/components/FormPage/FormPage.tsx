@@ -122,11 +122,11 @@ export class FormPage extends Component {
       this.state.formRef.current?.reset();
     }
   };
-  componentDidUpdate(prevState: FormCreate) {
+  componentDidUpdate(prevProps: FormCreate, prevState: FormCreate) {
     if (this.state.success !== prevState.success) {
       setTimeout(() => {
         this.setState({ success: false });
-      }, 2000);
+      }, 3000);
     }
   }
   render() {
