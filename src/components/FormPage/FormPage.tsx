@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./FormPage.module.css";
-import { CreatedForm } from "../../components/CreatedForm";
-import { Card } from "../../components/Card";
-import { CarterCard } from "../../components/CardList/CardList";
-import { FormCreate } from "../../components/CreatedForm/CreatedForm";
+import { CreatedForm } from "../CreatedForm";
+import { Card } from "../Card";
+import { CarterCard } from "../CardList/CardList";
+import { FormCreate } from "../CreatedForm/CreatedForm";
 
 export class FormPage extends React.Component {
   state = {
@@ -131,7 +131,7 @@ export class FormPage extends React.Component {
   render() {
     return (
       <div className={styles.formPage} data-testid="form_page">
-        <CreatedForm {...this.state} />
+        <CreatedForm />
         <button type="button" onClick={this.formChecker}>
           SEND
         </button>
