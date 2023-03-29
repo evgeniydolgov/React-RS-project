@@ -21,7 +21,6 @@ export interface CarterList {
 export class CardList extends Component<CarterList> {
   render() {
     const { charters } = this.props;
-    console.log(charters);
     return (
       <div className={styles.cardList__container} data-testid="custom-element">
         {charters.map((charter) => {
