@@ -42,27 +42,15 @@ export class CreatedForm extends Component<FormCreate> {
       <form className={styles.form__container} ref={formRef}>
         <div>
           <InputElement {...this.props.name} />
-          {nameError ? (
-            <ErrorMessage message={"first upper letter, max 10 length"} />
-          ) : (
-            <ErrorMessage message={""} />
-          )}
+          {nameError && <ErrorMessage message={"first upper letter,less 10"} />}
         </div>
         <div>
           <InputElement {...this.props.date} />
-          {dateError ? (
-            <ErrorMessage message={"choice the date of creation"} />
-          ) : (
-            <ErrorMessage message={""} />
-          )}
+          {dateError && <ErrorMessage message={"choice date of creation"} />}
         </div>
         <div>
           <SelectElement {...this.props.fraction} />
-          {FractionError ? (
-            <ErrorMessage message={"checked the fraction"} />
-          ) : (
-            <ErrorMessage message={""} />
-          )}
+          {FractionError && <ErrorMessage message={"checked the fraction"} />}
         </div>
         <div>
           <span>Card cost: </span>
@@ -70,11 +58,7 @@ export class CreatedForm extends Component<FormCreate> {
             {cost.map((el) => (
               <CheckboxElement key={el.title} price={el} />
             ))}
-            {costError ? (
-              <ErrorMessage message={"checked the card cost"} />
-            ) : (
-              <ErrorMessage message={""} />
-            )}
+            {costError && <ErrorMessage message={"checked the card cost"} />}
           </div>
         </div>
         <div className={styles.frameChoice}>
@@ -82,27 +66,15 @@ export class CreatedForm extends Component<FormCreate> {
           {frame.map((el, i) => (
             <RadioElement key={new Date().getSeconds() + i} price={el} />
           ))}
-          {goldenFrameError ? (
+          {goldenFrameError && (
             <ErrorMessage message={"indicate the need for a frame"} />
-          ) : (
-            <ErrorMessage message={""} />
           )}
         </div>
         <div>
           <InputElement {...this.props.file} />
-          {imageError ? (
-            <ErrorMessage message={"upload the image"} />
-          ) : (
-            <ErrorMessage message={""} />
-          )}
+          {imageError && <ErrorMessage message={"upload the image"} />}
           <div></div>
-          {success ? (
-            <div style={{ height: "16px", color: "green", fontSize: "16px" }}>
-              card created!
-            </div>
-          ) : (
-            <div style={{ height: "16px" }}></div>
-          )}
+          {success && <div className={styles.success}>card created!</div>}
         </div>
       </form>
     );

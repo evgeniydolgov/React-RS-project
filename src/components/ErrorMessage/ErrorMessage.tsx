@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from "./ErrorMessage.module.css";
 
 interface ErrorText {
   message: string;
@@ -7,16 +8,6 @@ interface ErrorText {
 export class ErrorMessage extends Component<ErrorText> {
   render() {
     const { message } = this.props;
-    return (
-      <p
-        style={
-          message
-            ? { color: "red", height: "14px", fontSize: "12px" }
-            : { height: "14px", fontSize: "0px" }
-        }
-      >
-        {"Error! Please " + message}
-      </p>
-    );
+    return <p className={styles.error_mes}>{"Error! Please " + message}</p>;
   }
 }
