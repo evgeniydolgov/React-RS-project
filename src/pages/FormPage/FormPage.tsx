@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { Component } from "react";
+import React from "react";
 import styles from "./FormPage.module.css";
-import { CreatedForm } from "../CreatedForm";
-import { Card } from "../Card";
-import { CarterCard } from "../CardList/CardList";
-import { FormCreate } from "../CreatedForm/CreatedForm";
+import { CreatedForm } from "../../components/CreatedForm";
+import { Card } from "../../components/Card";
+import { CarterCard } from "../../components/CardList/CardList";
+import { FormCreate } from "../../components/CreatedForm/CreatedForm";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-export class FormPage extends Component {
+export class FormPage extends React.Component {
   state = {
     cardsParams: [] as CarterCard[],
     name: {
