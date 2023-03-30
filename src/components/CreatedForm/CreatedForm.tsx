@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import styles from "./CreatedForm.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { CarterCard } from "../CardList/CardList";
 
 enum FractionEnum {
-  empty = "",
   Neutral = "Neutral",
   Northerners = "Northerners",
   Scoiatael = "Scoiatael",
@@ -13,20 +13,69 @@ enum FractionEnum {
 type Inputs = {
   name: string;
   date: string;
-  fraction: FractionEnum;
+  belonging: FractionEnum;
   file: string;
   checkbox: boolean;
-  frame: string;
+  frame: boolean;
 };
 
-export const CreatedForm = () => {
+interface CardCreationArr {
+  cardsParams: CarterCard[];
+  setCardsParams: Dispatch<SetStateAction<CarterCard[]>>;
+}
+
+function sumCalculation(
+  cost1: HTMLInputElement,
+  cost2: HTMLInputElement,
+  cost3: HTMLInputElement,
+) {
+  const sumArr = [];
+  cost1.checked && sumArr.push(+cost1.value);
+  cost2.checked && sumArr.push(+cost2.value);
+  cost3.checked && sumArr.push(+cost3.value);
+  const sumOfCard = sumArr.reduce((acc, el) => {
+    return acc + el;
+  }, 0);
+  return sumOfCard;
+}
+
+export const CreatedForm: React.FC<CardCreationArr> = ({
+  cardsParams,
+  setCardsParams,
+}) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>({ reValidateMode: "onSubmit" });
+  } = useForm<Inputs>({
+    reValidateMode: "onSubmit",
+  });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => alert(JSON.stringify(data));
+  const onSubmit: SubmitHandler<Inputs> = (data, defaultValues) => {
+    const cost1 = defaultValues?.target.checkbox[0];
+    const cost2 = defaultValues?.target.checkbox[1];
+    const cost3 = defaultValues?.target.checkbox[2];
+    sumCalculation(cost1, cost2, cost3);
+
+    const newCard = {
+      name: defaultValues?.target.name.value,
+      date: defaultValues?.target.date.value,
+      belonging: defaultValues?.target.belonging.value,
+      // upload: defaultValues?.target.file,
+      cost: sumCalculation(cost1, cost2, cost3),
+      frame: !!+defaultValues?.target.frame.value,
+    };
+    // console.log(defaultValues?.target.name.value);
+    // console.log(defaultValues?.target.date.value);
+    // console.log(defaultValues?.target.belonging.value);
+    console.log(defaultValues?.target.file);
+    // console.log(defaultValues?.target.checkbox[0].checked);
+    // console.log(!!+defaultValues?.target.frame.value);
+
+    const copy = Object.assign([], cardsParams);
+    copy.push(newCard);
+    setCardsParams(copy);
+  };
 
   return (
     <form className={styles.form__container} onSubmit={handleSubmit(onSubmit)}>
@@ -77,7 +126,7 @@ export const CreatedForm = () => {
           Fraction:{" "}
           <select
             defaultValue={""}
-            {...register("fraction", {
+            {...register("belonging", {
               required: {
                 value: true,
                 message: "Error! Please change the fraction",
@@ -91,8 +140,8 @@ export const CreatedForm = () => {
             <option value="Skellige">Skellige</option>
           </select>
         </label>
-        {errors?.fraction && (
-          <div className={styles.error_mes}>{errors?.fraction?.message}</div>
+        {errors?.belonging && (
+          <div className={styles.error_mes}>{errors?.belonging?.message}</div>
         )}
       </div>
       <div className={styles.checkbox_input}>
@@ -134,13 +183,24 @@ export const CreatedForm = () => {
       <div>
         Golden frame:{" "}
         <label>
-          <input type="radio" value={"yes"} {...register("frame")} />
+          <input
+            type="radio"
+            value={1}
+            {...register("frame", { required: true })}
+          />
           Yes
         </label>
         <label>
-          <input type="radio" value={"no"} {...register("frame")} />
+          <input
+            type="radio"
+            value={0}
+            {...register("frame", { required: true })}
+          />
           No
         </label>
+        {errors?.frame && (
+          <div className={styles.error_mes}>Error! Check the cost</div>
+        )}
       </div>
       <div>
         <label>
