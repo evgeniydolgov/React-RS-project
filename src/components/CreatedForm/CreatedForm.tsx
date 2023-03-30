@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./CreatedForm.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CarterCard } from "../CardList/CardList";
@@ -43,9 +43,12 @@ export const CreatedForm: React.FC<CardCreationArr> = ({
   cardsParams,
   setCardsParams,
 }) => {
+  const [cardCreated, setCardCreated] = useState(false);
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Inputs>({
     reValidateMode: "onSubmit",
@@ -69,7 +72,15 @@ export const CreatedForm: React.FC<CardCreationArr> = ({
     const copy = Object.assign([], cardsParams);
     copy.push(newCard);
     setCardsParams(copy);
+    setCardCreated(true);
+    reset();
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCardCreated(false);
+    }, 3000);
+  }, [cardCreated]);
 
   return (
     <form className={styles.form__container} onSubmit={handleSubmit(onSubmit)}>
@@ -212,7 +223,7 @@ export const CreatedForm: React.FC<CardCreationArr> = ({
         {errors?.file && (
           <div className={styles.error_mes}>{errors?.file?.message}</div>
         )}
-        {true && <div className={styles.success}>card created!</div>}
+        {cardCreated && <div className={styles.success}>card created!</div>}
       </div>
       <input type="submit" value="SEND" />
     </form>
