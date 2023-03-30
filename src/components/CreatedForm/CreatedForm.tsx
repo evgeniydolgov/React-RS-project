@@ -61,16 +61,10 @@ export const CreatedForm: React.FC<CardCreationArr> = ({
       name: defaultValues?.target.name.value,
       date: defaultValues?.target.date.value,
       belonging: defaultValues?.target.belonging.value,
-      // upload: defaultValues?.target.file,
+      upload: defaultValues?.target.file.files[0],
       cost: sumCalculation(cost1, cost2, cost3),
       frame: !!+defaultValues?.target.frame.value,
     };
-    // console.log(defaultValues?.target.name.value);
-    // console.log(defaultValues?.target.date.value);
-    // console.log(defaultValues?.target.belonging.value);
-    console.log(defaultValues?.target.file);
-    // console.log(defaultValues?.target.checkbox[0].checked);
-    // console.log(!!+defaultValues?.target.frame.value);
 
     const copy = Object.assign([], cardsParams);
     copy.push(newCard);

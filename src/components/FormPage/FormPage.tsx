@@ -6,9 +6,7 @@ import { CarterCard } from "../CardList/CardList";
 
 export const FormPage = () => {
   const [cardsParams, setCardsParams] = useState<CarterCard[]>([]);
-  useEffect(() => {
-    console.log(cardsParams);
-  }, [cardsParams]);
+  useEffect(() => {}, [cardsParams]);
   return (
     <div className={styles.formPage} data-testid="form_page">
       <CreatedForm setCardsParams={setCardsParams} cardsParams={cardsParams} />
