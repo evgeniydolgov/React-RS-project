@@ -83,7 +83,11 @@ export const CreatedForm: React.FC<CardCreationArr> = ({
   }, [cardCreated]);
 
   return (
-    <form className={styles.form__container} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={styles.form__container}
+      onSubmit={handleSubmit(onSubmit)}
+      data-testid="test"
+    >
       <div>
         <label>
           Card name:{" "}

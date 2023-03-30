@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./MainPage.module.css";
-import { CardList } from "../CardList";
+import { CardList } from "../../components/CardList";
 import { chartersData } from "../../data/data";
 
 export const MainPage = () => {

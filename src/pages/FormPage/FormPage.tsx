@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./FormPage.module.css";
-import { CreatedForm } from "../CreatedForm";
-import { Card } from "../Card";
-import { CarterCard } from "../CardList/CardList";
+import { CreatedForm } from "../../components/CreatedForm";
+import { Card } from "../../components/Card";
+import { CarterCard } from "../../components/CardList/CardList";
 
 export const FormPage = () => {
   const [cardsParams, setCardsParams] = useState<CarterCard[]>([]);
