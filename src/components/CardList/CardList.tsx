@@ -3,14 +3,14 @@ import React, { Component } from "react";
 import styles from "./CardList.module.css";
 
 export interface CarterCard {
-  id?: number;
   name: string;
+  belonging: string;
+  cost: number;
+  id?: number;
   description?: string;
   date?: string;
   image?: string;
   upload?: Blob | MediaSource | undefined;
-  belonging: string;
-  cost: number;
   frame?: boolean;
 }
 
@@ -21,7 +21,6 @@ export interface CarterList {
 export class CardList extends Component<CarterList> {
   render() {
     const { charters } = this.props;
-    console.log(charters);
     return (
       <div className={styles.cardList__container} data-testid="custom-element">
         {charters.map((charter) => {

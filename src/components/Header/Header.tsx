@@ -5,19 +5,6 @@ import { NavLink } from "react-router-dom";
 import { withRouter, WithRouterProps } from "../../utils/withRouter";
 
 class Header extends Component<WithRouterProps> {
-  state = {
-    pageName: "Main Page",
-  };
-
-  componentDidMount(): void {
-    const { pathname } = this.props.location;
-    if (pathname === "/") {
-      this.setState({ pageName: "Main Page" });
-    } else {
-      this.setState({ pageName: "About" });
-    }
-  }
-
   render() {
     const { pathname } = this.props.location;
     return (

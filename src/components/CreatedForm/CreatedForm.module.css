@@ -4,10 +4,32 @@
   gap: 0;
 }
 
+.form__container>div {
+  padding-bottom: 15px;
+}
+
 .choicePrice>label {
   margin-right: 15px;
 }
 
 .frameChoice>label {
   margin-right: 15px;
+}
+
+.success {
+  height: 15px; 
+  color: green;
+  font-size: 15px; 
+  position: absolute;
+}
+
+.error_mes {
+  color: red;
+  height: 14px;
+  font-size: 12px;
+  position: absolute;
+}
+
+.checkbox_input>label {
+  padding: 0 10px;
 }
