@@ -3,14 +3,14 @@ import React, { Component } from "react";
 import styles from "./CardList.module.css";
 
 export interface CarterCard {
-  id?: number;
   name: string;
+  belonging: string;
+  cost: number;
+  id?: number;
   description?: string;
   date?: string;
   image?: string;
   upload?: Blob | MediaSource | undefined;
-  belonging: string;
-  cost: number;
   frame?: boolean;
 }
 
