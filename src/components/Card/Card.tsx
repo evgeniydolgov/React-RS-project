@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import { CarterCard } from "components/CardList/CardList";
+import { OneCgarterDate } from "pages/MainPage/MainPage";
 import styles from "./Card.module.css";
 
-export class Card extends Component<CarterCard> {
+export class Card extends Component<OneCgarterDate> {
   render() {
-    const { image, name, description, belonging, cost, upload, frame } =
-      this.props;
+    const { image, name, species, created, upload, frame } = this.props;
     const imgSrc = upload ? URL.createObjectURL(upload) : image;
-
     return (
       <div className={styles.card__container} data-testid="card-container">
         <div className={styles.card__img}>
@@ -24,11 +22,14 @@ export class Card extends Component<CarterCard> {
             </h3>
             <p>
               <span style={{ fontSize: "12px" }}>Fraction: </span>
-              {belonging[0].toUpperCase() + belonging.slice(1)}
+              {species[0].toUpperCase() + species.slice(1)}
             </p>
             <p>
               <span style={{ fontSize: "12px" }}>Cost: </span>
-              {cost}$
+              {created.slice(21, 23)[0] === "0"
+                ? created.slice(22, 23)
+                : created.slice(21, 23)}
+              $
             </p>
           </div>
           <div>
@@ -37,7 +38,9 @@ export class Card extends Component<CarterCard> {
                 Date of creation: <p>{this.props.date}</p>
               </div>
             ) : (
-              description
+              <div>
+                Date of creation: <p>{created.slice(0, 10)}</p>
+              </div>
             )}
           </div>
         </div>

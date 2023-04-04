@@ -1,21 +1,10 @@
 import { Card } from "../Card";
 import React, { Component } from "react";
 import styles from "./CardList.module.css";
-
-export interface CarterCard {
-  name: string;
-  belonging: string;
-  cost: number;
-  id?: number;
-  description?: string;
-  date?: string;
-  image?: string;
-  upload?: Blob | MediaSource | undefined;
-  frame?: boolean;
-}
+import { OneCgarterDate } from "pages/MainPage/MainPage";
 
 export interface CarterList {
-  charters: CarterCard[];
+  charters: OneCgarterDate[];
 }
 
 export class CardList extends Component<CarterList> {
