@@ -1,19 +1,28 @@
 import { Card } from "../Card";
 import React, { Component } from "react";
 import styles from "./CardList.module.css";
-import { OneCgarterDate } from "pages/MainPage/MainPage";
+import { OneCharterDate } from "pages/MainPage/MainPage";
 
 export interface CarterList {
-  charters: OneCgarterDate[];
+  charters: OneCharterDate[];
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setCharterInfo: React.Dispatch<React.SetStateAction<OneCharterDate>>;
 }
 
 export class CardList extends Component<CarterList> {
   render() {
-    const { charters } = this.props;
+    const { charters, setIsActive, setCharterInfo } = this.props;
     return (
       <div className={styles.cardList__container} data-testid="custom-element">
         {charters.map((charter) => {
-          return <Card key={charter.id} {...charter} />;
+          return (
+            <Card
+              key={charter.id}
+              {...charter}
+              setIsActive={setIsActive}
+              setCharterInfo={setCharterInfo}
+            />
+          );
         })}
       </div>
     );

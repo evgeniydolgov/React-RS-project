@@ -1,13 +1,32 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Component } from "react";
-import { OneCgarterDate } from "pages/MainPage/MainPage";
+import { OneCharterDate } from "pages/MainPage/MainPage";
 import styles from "./Card.module.css";
 
-export class Card extends Component<OneCgarterDate> {
+export class Card extends Component<OneCharterDate> {
   render() {
-    const { image, name, species, created, upload, frame } = this.props;
+    const {
+      image,
+      name,
+      species,
+      created,
+      upload,
+      frame,
+      setIsActive,
+      setCharterInfo,
+    } = this.props;
     const imgSrc = upload ? URL.createObjectURL(upload) : image;
+
+    const openCharterCard = () => {
+      setIsActive && setIsActive(true);
+      setCharterInfo && setCharterInfo(this.props);
+    };
     return (
-      <div className={styles.card__container} data-testid="card-container">
+      <div
+        className={styles.card__container}
+        data-testid="card-container"
+        onClick={openCharterCard}
+      >
         <div className={styles.card__img}>
           <div
             className={frame || frame === undefined ? styles.golder__board : ""}

@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./MainPage.module.css";
 import { CardList } from "../../components/CardList";
+import { PopUp } from "../../components/PopUp";
 
-export interface OneCgarterDate {
+export interface OneCharterDate {
   id: number;
   name: string;
   status: string;
@@ -24,6 +25,8 @@ export interface OneCgarterDate {
   upload?: Blob | MediaSource | undefined;
   frame?: boolean;
   date?: string;
+  setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
+  setCharterInfo?: React.Dispatch<React.SetStateAction<OneCharterDate>>;
 }
 
 export const MainPage = () => {
@@ -36,14 +39,18 @@ export const MainPage = () => {
     return userInput ? `name=${userInput}` : "page=1";
   }
   const [inputValue, setinputValue] = useState(setDefaultValue());
-  const [chartersData, setChartersData] = useState([] as OneCgarterDate[]);
+  const [chartersData, setChartersData] = useState([] as OneCharterDate[]);
   const [searchValue, setSearchValue] = useState(setDefaultSearchParam());
+  const [errorRequest, setErrorRequest] = useState(false);
+  const [isActiv, setIsActive] = useState(true);
+  const [charterInfo, setCharterInfo] = useState({} as OneCharterDate);
 
   const inputValueRef = useRef<string>();
 
   const stopSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     setSearchValue(`name=${inputValue}`);
+    localStorage.setItem("inputValue", inputValueRef.current as string);
   };
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -57,7 +64,11 @@ export const MainPage = () => {
   useEffect(() => {
     fetch(`https://rickandmortyapi.com/api/character/?${searchValue}`)
       .then((response) => response.json())
-      .then((data) => setChartersData([...data.results]));
+      .then((data) => {
+        setChartersData([...data.results]);
+        setErrorRequest(false);
+      })
+      .catch(() => setErrorRequest(true));
   }, [searchValue]);
 
   useEffect(() => {
@@ -83,13 +94,27 @@ export const MainPage = () => {
             onClick={stopSubmit}
             type="submit"
           ></button>
+          {errorRequest && (
+            <div className={styles.incorrectValue}>
+              Nothing found, please select another value
+            </div>
+          )}
         </form>
         {chartersData.length !== 0 ? (
-          <CardList charters={chartersData} />
+          <CardList
+            charters={chartersData}
+            setIsActive={setIsActive}
+            setCharterInfo={setCharterInfo}
+          />
         ) : (
           <div> loading</div>
         )}
       </div>
+      <PopUp
+        setIsActive={setIsActive}
+        isActiv={isActiv}
+        charterInfo={charterInfo}
+      />
     </main>
   );
 };
