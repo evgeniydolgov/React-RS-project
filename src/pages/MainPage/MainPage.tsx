@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./MainPage.module.css";
 import { CardList } from "../../components/CardList";
 import { PopUp } from "../../components/PopUp";
+import { Loading } from "../../components/Loading";
 
 export interface OneCharterDate {
   id?: number;
@@ -80,43 +81,44 @@ export const MainPage = () => {
 
   return (
     <main className={styles.mainPage}>
-      <div className={styles.mainPage__wrapper}>
-        <h2>Main page</h2>
-        <form className={styles.mainPage__form}>
-          <input
-            className={styles.mainPage__input}
-            type="text"
-            placeholder="Search..."
-            onChange={handleChange}
-            value={inputValue}
-          />
-          <button
-            className={styles.mainPage__button}
-            onClick={stopSubmit}
-            type="submit"
-          ></button>
-          {errorRequest && (
-            <div className={styles.incorrectValue}>
-              Nothing found, please select another value
-            </div>
-          )}
-        </form>
-        {chartersData.length !== 0 ? (
+      {chartersData.length !== 0 ? (
+        <div className={styles.mainPage__wrapper}>
+          <h2>Main page</h2>
+          <form className={styles.mainPage__form}>
+            <input
+              className={styles.mainPage__input}
+              type="text"
+              placeholder="Search..."
+              onChange={handleChange}
+              value={inputValue}
+            />
+            <button
+              className={styles.mainPage__button}
+              onClick={stopSubmit}
+              type="submit"
+            ></button>
+            {errorRequest && (
+              <div className={styles.incorrectValue}>
+                Nothing found, please select another value
+              </div>
+            )}
+          </form>
+
           <CardList
             charters={chartersData}
             setIsActive={setIsActive}
             setCharterInfo={setCharterInfo}
           />
-        ) : (
-          <div> loading</div>
-        )}
-      </div>
-      {charterInfo && (
-        <PopUp
-          setIsActive={setIsActive}
-          isActiv={isActiv}
-          charterInfo={charterInfo}
-        />
+          {charterInfo && (
+            <PopUp
+              setIsActive={setIsActive}
+              isActiv={isActiv}
+              charterInfo={charterInfo}
+            />
+          )}
+        </div>
+      ) : (
+        <Loading />
       )}
     </main>
   );
