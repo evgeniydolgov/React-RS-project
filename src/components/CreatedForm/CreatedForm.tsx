@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./CreatedForm.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { CarterCard } from "../CardList/CardList";
+import { OneCharterDate } from "pages/MainPage/MainPage";
 
 enum FractionEnum {
   Neutral = "Neutral",
@@ -20,8 +20,8 @@ type Inputs = {
 };
 
 interface CardCreationArr {
-  cardsParams: CarterCard[];
-  setCardsParams: Dispatch<SetStateAction<CarterCard[]>>;
+  cardsParams: OneCharterDate[];
+  setCardsParams: Dispatch<SetStateAction<OneCharterDate[]>>;
 }
 
 function sumCalculation(
@@ -36,7 +36,7 @@ function sumCalculation(
   const sumOfCard = sumArr.reduce((acc, el) => {
     return acc + el;
   }, 0);
-  return sumOfCard;
+  return String(sumOfCard).length === 1 ? "0" + sumOfCard : String(sumOfCard);
 }
 
 export const CreatedForm: React.FC<CardCreationArr> = ({
@@ -63,10 +63,13 @@ export const CreatedForm: React.FC<CardCreationArr> = ({
     const newCard = {
       name: defaultValues?.target.name.value,
       date: defaultValues?.target.date.value,
-      belonging: defaultValues?.target.belonging.value,
+      species: defaultValues?.target.belonging.value,
       upload: defaultValues?.target.file.files[0],
       cost: sumCalculation(cost1, cost2, cost3),
       frame: !!+defaultValues?.target.frame.value,
+      type: "unknown",
+      status: "Alive",
+      gender: "No data",
     };
 
     const copy = Object.assign([], cardsParams);
@@ -143,10 +146,10 @@ export const CreatedForm: React.FC<CardCreationArr> = ({
             })}
           >
             <option value="" disabled></option>
-            <option value="Neutral">Neutral</option>
-            <option value="Northerners">Northerners</option>
-            <option value="Scoiatael">Scoiatael</option>
-            <option value="Skellige">Skellige</option>
+            <option value="Human">Human</option>
+            <option value="Alien">Alien</option>
+            <option value="Humanoid">Humanoid</option>
+            <option value="Mythological Creature">Mythological Creature</option>
           </select>
         </label>
         {errors?.belonging && (

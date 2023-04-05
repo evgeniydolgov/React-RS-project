@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Component } from "react";
 import { OneCharterDate } from "pages/MainPage/MainPage";
 import styles from "./Card.module.css";
@@ -45,7 +44,11 @@ export class Card extends Component<OneCharterDate> {
             </p>
             <p>
               <span style={{ fontSize: "12px" }}>Cost: </span>
-              {created.slice(21, 23)}$
+              {this.props.cost ? (
+                <span>{this.props.cost}$</span>
+              ) : (
+                <span>{created && created.slice(21, 23)}$</span>
+              )}
             </p>
           </div>
           <div>
@@ -55,7 +58,7 @@ export class Card extends Component<OneCharterDate> {
               </div>
             ) : (
               <div>
-                Date of creation: <p>{created.slice(0, 10)}</p>
+                Date of creation: <p>{created && created.slice(0, 10)}</p>
               </div>
             )}
           </div>

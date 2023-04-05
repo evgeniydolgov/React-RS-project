@@ -4,26 +4,27 @@ import { CardList } from "../../components/CardList";
 import { PopUp } from "../../components/PopUp";
 
 export interface OneCharterDate {
-  id: number;
+  id?: number;
   name: string;
   status: string;
   species: string;
   type: string;
   gender: string;
-  origin: {
+  origin?: {
     name: string;
     url: string;
   };
-  location: {
+  location?: {
     name: string;
     url: string;
   };
-  image: string;
-  episode: string[];
-  url: string;
-  created: string;
+  image?: string;
+  episode?: string[];
+  url?: string;
+  created?: string;
   upload?: Blob | MediaSource | undefined;
   frame?: boolean;
+  cost?: string;
   date?: string;
   setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
   setCharterInfo?: React.Dispatch<React.SetStateAction<OneCharterDate>>;
