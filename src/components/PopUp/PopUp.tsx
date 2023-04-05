@@ -26,20 +26,14 @@ export const PopUp = ({ isActiv, setIsActive, charterInfo }: PopUpValue) => {
             <img src={image} alt="charter image" />
           </div>
           <div className={styles.charter_info}>
-            <p>Name: {name}</p>
-            <p>Status: {status}</p>
-            <p>Species: {species}</p>
+            <p>Name: {name || "unknow"}</p>
+            <p>Status: {status || "unknow"}</p>
+            <p>Species: {species || "unknow"}</p>
             <p>Type: {type || "No data"}</p>
-            <p>Gender: {gender}</p>
-            <p>Location: {location.name}</p>
-            <p>
-              Card cost:{" "}
-              {created.slice(21, 23)[0] === "0"
-                ? created.slice(22, 23)
-                : created.slice(21, 23)}
-              $
-            </p>
-            <p>Created: {created.slice(0, 10)}</p>
+            <p>Gender: {gender || "unknow"}</p>
+            <p>Location: {location && location.name}</p>
+            <p>Card cost: {created && created.slice(21, 23)}$</p>
+            <p>Created: {created && created.slice(0, 10)}</p>
           </div>
           <button
             type="button"

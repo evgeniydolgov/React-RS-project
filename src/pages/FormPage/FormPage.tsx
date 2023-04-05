@@ -1,11 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import styles from "./FormPage.module.css";
 import { CreatedForm } from "../../components/CreatedForm";
 import { Card } from "../../components/Card";
-import { CarterCard } from "../../components/CardList/CardList";
 
 export const FormPage = () => {
-  const [cardsParams, setCardsParams] = useState<CarterCard[]>([]);
+  const [cardsParams, setCardsParams] = useState<any[]>([]);
   return (
     <div className={styles.formPage} data-testid="form_page">
       <CreatedForm setCardsParams={setCardsParams} cardsParams={cardsParams} />

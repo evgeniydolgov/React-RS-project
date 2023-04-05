@@ -36,7 +36,7 @@ export class Card extends Component<OneCharterDate> {
         <div className={styles.card__text}>
           <div>
             <h3>
-              <span style={{ fontSize: "12px" }}>Card name: </span>
+              <span style={{ fontSize: "12px" }}>Name: </span>
               {name}
             </h3>
             <p>
@@ -45,10 +45,7 @@ export class Card extends Component<OneCharterDate> {
             </p>
             <p>
               <span style={{ fontSize: "12px" }}>Cost: </span>
-              {created.slice(21, 23)[0] === "0"
-                ? created.slice(22, 23)
-                : created.slice(21, 23)}
-              $
+              {created.slice(21, 23)}$
             </p>
           </div>
           <div>

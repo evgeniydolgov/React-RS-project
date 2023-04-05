@@ -3,18 +3,17 @@
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 0;
+  top: -2000px;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.844);
   z-index: 1;
   transition: 1s;
-  transform: translate(0, -2000px);
 }
 .active {
   transition: 1s;
-  transform: translate(0, 0);
+  transform: translate(0, 2000px);
 }
 
 .charter_card {

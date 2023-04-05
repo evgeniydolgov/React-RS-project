@@ -42,7 +42,7 @@ export const MainPage = () => {
   const [chartersData, setChartersData] = useState([] as OneCharterDate[]);
   const [searchValue, setSearchValue] = useState(setDefaultSearchParam());
   const [errorRequest, setErrorRequest] = useState(false);
-  const [isActiv, setIsActive] = useState(true);
+  const [isActiv, setIsActive] = useState(false);
   const [charterInfo, setCharterInfo] = useState({} as OneCharterDate);
 
   const inputValueRef = useRef<string>();
@@ -110,11 +110,13 @@ export const MainPage = () => {
           <div> loading</div>
         )}
       </div>
-      <PopUp
-        setIsActive={setIsActive}
-        isActiv={isActiv}
-        charterInfo={charterInfo}
-      />
+      {charterInfo && (
+        <PopUp
+          setIsActive={setIsActive}
+          isActiv={isActiv}
+          charterInfo={charterInfo}
+        />
+      )}
     </main>
   );
 };
