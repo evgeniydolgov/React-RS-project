@@ -11,17 +11,10 @@ export interface OneCharterDate {
   species: string;
   type: string;
   gender: string;
-  origin?: {
-    name: string;
-    url: string;
-  };
   location?: {
     name: string;
-    url: string;
   };
   image?: string;
-  episode?: string[];
-  url?: string;
   created?: string;
   upload?: Blob | MediaSource | undefined;
   frame?: boolean;
@@ -70,14 +63,11 @@ export const MainPage = () => {
         setChartersData([...data.results]);
         setErrorRequest(false);
       })
-      .catch(() => setErrorRequest(true));
+      .catch(() => {
+        setErrorRequest(true);
+        localStorage.setItem("inputValue", "");
+      });
   }, [searchValue]);
-
-  useEffect(() => {
-    return () => {
-      localStorage.setItem("inputValue", inputValueRef.current as string);
-    };
-  }, []);
 
   return (
     <main className={styles.mainPage}>

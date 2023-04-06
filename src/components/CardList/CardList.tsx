@@ -5,8 +5,8 @@ import { OneCharterDate } from "pages/MainPage/MainPage";
 
 export interface CarterList {
   charters: OneCharterDate[];
-  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-  setCharterInfo: React.Dispatch<React.SetStateAction<OneCharterDate>>;
+  setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
+  setCharterInfo?: React.Dispatch<React.SetStateAction<OneCharterDate>>;
 }
 
 export class CardList extends Component<CarterList> {
