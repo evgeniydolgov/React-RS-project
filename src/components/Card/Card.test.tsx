@@ -4,12 +4,15 @@ import { describe, it } from "vitest";
 import { Card } from "./Card";
 
 const testObj = {
-  id: 0,
-  name: "string",
-  description: "string",
-  image: "https://gwent.one/image/gwent/assets/card/art/low/1009.jpg",
-  belonging: "string",
-  cost: 0,
+  id: 2,
+  name: "Testing Morty",
+  status: "Alive",
+  species: "Human",
+  type: "",
+  gender: "Male",
+  image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+  url: "https://rickandmortyapi.com/api/character/1",
+  created: "2017-11-04T18:48:46.250Z",
 };
 
 describe("testing Card", () => {

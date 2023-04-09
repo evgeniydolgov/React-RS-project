@@ -10,7 +10,7 @@
   width: 100%;
 }
 
-.mainPage__wrapper>h2 {
+.mainPage__wrapper > h2 {
   margin: 10px 0;
 }
 
@@ -40,7 +40,7 @@
   width: 42px;
   height: 42px;
   border: none;
-  background: rgb(109, 206, 174);;
+  background: rgb(109, 206, 174);
   border-radius: 0 5px 5px 0;
   cursor: pointer;
 }
@@ -48,5 +48,10 @@
 .mainPage__button:before {
   content: "\276F";
   font-size: 16px;
-  color: #F9F0DA;
+  color: #f9f0da;
+}
+
+.incorrectValue {
+  position: absolute;
+  color: red;
 }

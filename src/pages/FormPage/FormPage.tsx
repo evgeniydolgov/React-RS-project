@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styles from "./FormPage.module.css";
 import { CreatedForm } from "../../components/CreatedForm";
 import { Card } from "../../components/Card";
-import { CarterCard } from "../../components/CardList/CardList";
+import { OneCharterDate } from "pages/MainPage/MainPage";
 
 export const FormPage = () => {
-  const [cardsParams, setCardsParams] = useState<CarterCard[]>([]);
+  const [cardsParams, setCardsParams] = useState<OneCharterDate[]>([]);
   return (
     <div className={styles.formPage} data-testid="form_page">
       <CreatedForm setCardsParams={setCardsParams} cardsParams={cardsParams} />

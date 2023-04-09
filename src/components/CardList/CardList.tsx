@@ -1,30 +1,28 @@
 import { Card } from "../Card";
 import React, { Component } from "react";
 import styles from "./CardList.module.css";
-
-export interface CarterCard {
-  name: string;
-  belonging: string;
-  cost: number;
-  id?: number;
-  description?: string;
-  date?: string;
-  image?: string;
-  upload?: Blob | MediaSource | undefined;
-  frame?: boolean;
-}
+import { OneCharterDate } from "pages/MainPage/MainPage";
 
 export interface CarterList {
-  charters: CarterCard[];
+  charters: OneCharterDate[];
+  setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
+  setCharterInfo?: React.Dispatch<React.SetStateAction<OneCharterDate>>;
 }
 
 export class CardList extends Component<CarterList> {
   render() {
-    const { charters } = this.props;
+    const { charters, setIsActive, setCharterInfo } = this.props;
     return (
       <div className={styles.cardList__container} data-testid="custom-element">
         {charters.map((charter) => {
-          return <Card key={charter.id} {...charter} />;
+          return (
+            <Card
+              key={charter.id}
+              {...charter}
+              setIsActive={setIsActive}
+              setCharterInfo={setCharterInfo}
+            />
+          );
         })}
       </div>
     );
