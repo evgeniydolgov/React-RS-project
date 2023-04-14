@@ -3,6 +3,8 @@ import styles from "./MainPage.module.css";
 import { CardList } from "../../components/CardList";
 import { PopUp } from "../../components/PopUp";
 import { Loading } from "../../components/Loading";
+import { useAppSelector, useAppDispatch } from "../../hook";
+import { setInputText } from "../../store/searchSlice";
 
 export interface OneCharterDate {
   id?: number;
@@ -25,39 +27,26 @@ export interface OneCharterDate {
 }
 
 export const MainPage = () => {
-  function setDefaultValue() {
-    const userInput = localStorage.getItem("inputValue");
-    return userInput ? userInput : "";
-  }
-  function setDefaultSearchParam() {
-    const userInput = localStorage.getItem("inputValue");
-    return userInput ? `name=${userInput}` : "page=1";
-  }
-  const [inputValue, setinputValue] = useState(setDefaultValue());
+  const dispatch = useAppDispatch();
+  const inputValue = useAppSelector((state) => state.searchValue.searchValue);
+
   const [chartersData, setChartersData] = useState([] as OneCharterDate[]);
-  const [searchValue, setSearchValue] = useState(setDefaultSearchParam());
+  const [searchValue, setSearchValue] = useState("");
   const [errorRequest, setErrorRequest] = useState(false);
   const [isActiv, setIsActive] = useState(false);
   const [charterInfo, setCharterInfo] = useState({} as OneCharterDate);
 
-  const inputValueRef = useRef<string>();
-
   const stopSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    setSearchValue(`name=${inputValue}`);
-    localStorage.setItem("inputValue", inputValueRef.current as string);
-  };
-
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    setinputValue(event.currentTarget.value);
+    setSearchValue(inputValue);
   };
 
   useEffect(() => {
-    inputValueRef.current = inputValue;
-  }, [inputValue]);
+    setSearchValue(inputValue);
+  }, []);
 
   useEffect(() => {
-    fetch(`https://rickandmortyapi.com/api/character/?${searchValue}`)
+    fetch(`https://rickandmortyapi.com/api/character/?name=${searchValue}`)
       .then((response) => response.json())
       .then((data) => {
         setChartersData([...data.results]);
@@ -65,51 +54,54 @@ export const MainPage = () => {
       })
       .catch(() => {
         setErrorRequest(true);
-        localStorage.setItem("inputValue", "");
       });
   }, [searchValue]);
 
   return (
     <main className={styles.mainPage}>
-      {chartersData.length !== 0 ? (
-        <div className={styles.mainPage__wrapper}>
-          <h2>Main page</h2>
-          <form className={styles.mainPage__form}>
-            <input
-              className={styles.mainPage__input}
-              type="text"
-              placeholder="Search..."
-              onChange={handleChange}
-              value={inputValue}
-            />
-            <button
-              className={styles.mainPage__button}
-              onClick={stopSubmit}
-              type="submit"
-            ></button>
-            {errorRequest && (
-              <div className={styles.incorrectValue}>
-                Nothing found, please select another value
-              </div>
-            )}
-          </form>
-
-          <CardList
-            charters={chartersData}
-            setIsActive={setIsActive}
-            setCharterInfo={setCharterInfo}
+      <div className={styles.mainPage__wrapper}>
+        <h2>Main page</h2>
+        <form className={styles.mainPage__form}>
+          <input
+            className={styles.mainPage__input}
+            type="text"
+            placeholder="Search..."
+            onChange={(event) =>
+              dispatch(setInputText(event.currentTarget.value))
+            }
+            value={inputValue}
           />
-          {charterInfo && (
-            <PopUp
-              setIsActive={setIsActive}
-              isActiv={isActiv}
-              charterInfo={charterInfo}
-            />
+          <button
+            className={styles.mainPage__button}
+            onClick={stopSubmit}
+            type="submit"
+          ></button>
+          {errorRequest && (
+            <div className={styles.incorrectValue}>
+              Nothing found, please select another value
+            </div>
           )}
-        </div>
-      ) : (
-        <Loading />
-      )}
+        </form>
+        {chartersData.length !== 0 ? (
+          <>
+            {" "}
+            <CardList
+              charters={chartersData}
+              setIsActive={setIsActive}
+              setCharterInfo={setCharterInfo}
+            />
+            {charterInfo && (
+              <PopUp
+                setIsActive={setIsActive}
+                isActiv={isActiv}
+                charterInfo={charterInfo}
+              />
+            )}
+          </>
+        ) : (
+          <Loading />
+        )}
+      </div>
     </main>
   );
 };
