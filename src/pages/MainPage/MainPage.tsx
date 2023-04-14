@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./MainPage.module.css";
 import { CardList } from "../../components/CardList";
 import { PopUp } from "../../components/PopUp";
@@ -43,6 +43,7 @@ export const MainPage = () => {
 
   useEffect(() => {
     setSearchValue(inputValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

@@ -4,10 +4,6 @@ type SearchInput = {
   searchValue: string;
 };
 
-// type SearchState = {
-//   list: Todo[];
-// };
-
 const initialState: SearchInput = {
   searchValue: "",
 };
@@ -17,7 +13,6 @@ const searchSlice = createSlice({
   initialState,
   reducers: {
     setInputText(state, action: PayloadAction<string>) {
-      console.log(state.searchValue);
       state.searchValue = action.payload;
     },
   },
