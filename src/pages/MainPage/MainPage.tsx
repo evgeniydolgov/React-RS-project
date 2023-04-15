@@ -5,14 +5,15 @@ import { PopUp } from "../../components/PopUp";
 import { Loading } from "../../components/Loading";
 import { useAppSelector, useAppDispatch } from "../../hook";
 import { setInputText } from "../../store/searchSlice";
+import { useGetCardQuery } from "../../store/cardApi";
 
 export interface OneCharterDate {
   id?: number;
   name: string;
-  status: string;
   species: string;
-  type: string;
-  gender: string;
+  status?: string;
+  type?: string;
+  gender?: string;
   location?: {
     name: string;
   };
@@ -36,6 +37,8 @@ export const MainPage = () => {
   const [isActiv, setIsActive] = useState(false);
   const [charterInfo, setCharterInfo] = useState({} as OneCharterDate);
 
+  const { data, isLoading, error } = useGetCardQuery(searchValue);
+
   const stopSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     setSearchValue(inputValue);
@@ -43,20 +46,13 @@ export const MainPage = () => {
 
   useEffect(() => {
     setSearchValue(inputValue);
+    if (data) {
+      setChartersData(data.results);
+      setErrorRequest(false);
+    }
+    error && setErrorRequest(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    fetch(`https://rickandmortyapi.com/api/character/?name=${searchValue}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setChartersData([...data.results]);
-        setErrorRequest(false);
-      })
-      .catch(() => {
-        setErrorRequest(true);
-      });
-  }, [searchValue]);
+  }, [data, error]);
 
   return (
     <main className={styles.mainPage}>
@@ -83,7 +79,7 @@ export const MainPage = () => {
             </div>
           )}
         </form>
-        {chartersData.length !== 0 ? (
+        {!isLoading ? (
           <>
             {" "}
             <CardList

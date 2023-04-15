@@ -63,9 +63,6 @@ export const CreatedForm = () => {
       upload: defaultValues?.target.file.files[0],
       cost: sumCalculation(cost1, cost2, cost3),
       frame: !!+defaultValues?.target.frame.value,
-      type: "unknown",
-      status: "Alive",
-      gender: "No data",
     };
 
     const copy = Object.assign([], cardsParams);
