@@ -14,5 +14,4 @@ const createdCard = createSlice({
 });
 
 export const { addNewCard } = createdCard.actions;
-
 export default createdCard.reducer;

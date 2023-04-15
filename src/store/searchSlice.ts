@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { cardApi } from "./cardApi";
 
 type SearchInput = {
   searchValue: string;
