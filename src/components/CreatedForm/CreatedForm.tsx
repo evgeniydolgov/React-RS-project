@@ -1,7 +1,8 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CreatedForm.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { OneCharterDate } from "pages/MainPage/MainPage";
+import { addNewCard } from "../../store/createdCardSlice";
+import { useAppDispatch, useAppSelector } from "../../hook";
 
 enum FractionEnum {
   Neutral = "Neutral",
@@ -19,11 +20,6 @@ type Inputs = {
   frame: boolean;
 };
 
-interface CardCreationArr {
-  cardsParams: OneCharterDate[];
-  setCardsParams: Dispatch<SetStateAction<OneCharterDate[]>>;
-}
-
 function sumCalculation(
   cost1: HTMLInputElement,
   cost2: HTMLInputElement,
@@ -39,11 +35,10 @@ function sumCalculation(
   return String(sumOfCard).length === 1 ? "0" + sumOfCard : String(sumOfCard);
 }
 
-export const CreatedForm: React.FC<CardCreationArr> = ({
-  cardsParams,
-  setCardsParams,
-}) => {
+export const CreatedForm = () => {
   const [cardCreated, setCardCreated] = useState(false);
+  const cardsParams = useAppSelector((state) => state.newCardList.list);
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -60,6 +55,7 @@ export const CreatedForm: React.FC<CardCreationArr> = ({
     const cost3 = defaultValues?.target.checkbox[2];
     sumCalculation(cost1, cost2, cost3);
 
+    console.log(defaultValues?.target.file.files[0]);
     const newCard = {
       name: defaultValues?.target.name.value,
       date: defaultValues?.target.date.value,
@@ -67,14 +63,11 @@ export const CreatedForm: React.FC<CardCreationArr> = ({
       upload: defaultValues?.target.file.files[0],
       cost: sumCalculation(cost1, cost2, cost3),
       frame: !!+defaultValues?.target.frame.value,
-      type: "unknown",
-      status: "Alive",
-      gender: "No data",
     };
 
     const copy = Object.assign([], cardsParams);
     copy.push(newCard);
-    setCardsParams(copy);
+    dispatch(addNewCard(newCard));
     setCardCreated(true);
     reset();
   };
